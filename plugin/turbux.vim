@@ -68,7 +68,9 @@ endfunction
 
 " Test running {{{1
 function! s:prefix_for_test(file)
-  if a:file =~# '_spec.rb$'
+  if a:file =~# '_spec.js.coffee$'
+    return g:turbux_command_rspec
+  elseif a:file =~# '_spec.rb$'
     return g:turbux_command_rspec
   elseif a:file =~# '\(\<test_.*\|_test\)\.rb$'
     return g:turbux_command_test_unit
