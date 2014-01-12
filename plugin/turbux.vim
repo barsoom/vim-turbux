@@ -1,4 +1,4 @@
-" turbux.vim - Turbo Ruby tests with tmux
+" turbux.vim - Turbo tests with tmux. Mostly for ruby but with some elixir support.
 " Author:      Joshua Davey <http://joshuadavey.com/>
 " Version:     1.0
 
@@ -20,6 +20,7 @@ function! s:turbux_command_setting(name, default_value)
   endif
 endfunction
 
+call s:turbux_command_setting("ex_unit", "mix test")
 call s:turbux_command_setting("rspec", "rspec")
 call s:turbux_command_setting("test_unit", "ruby -Itest")
 call s:turbux_command_setting("turnip", "rspec -rturnip")
@@ -80,6 +81,8 @@ function! s:prefix_for_test(file)
     else
       return g:turbux_command_cucumber
     endif
+  elseif a:file =~# '_test.exs$'
+    return g:turbux_command_ex_unit
   endif
   return ''
 endfunction
