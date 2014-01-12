@@ -212,6 +212,12 @@ function! SendTestToTmux(file) abort
 endfunction
 
 function! SendFocusedTestToTmux(file, line) abort
+  " Elixir mix does not support running tests on line numbers
+  if a:file =~# '_test.exs$'
+    call SendTestToTmux(a:file)
+    return
+  endif
+
   let focus = ":".a:line
 
   if s:prefix_for_test(a:file) == g:turbux_command_test_unit
