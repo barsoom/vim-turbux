@@ -20,6 +20,7 @@ function! s:turbux_command_setting(name, default_value)
   endif
 endfunction
 
+call s:turbux_command_setting("go", "go test")
 call s:turbux_command_setting("ex_unit", "mix test")
 call s:turbux_command_setting("rspec", "rspec")
 call s:turbux_command_setting("test_unit", "ruby -Itest")
@@ -83,6 +84,8 @@ function! s:prefix_for_test(file)
     endif
   elseif a:file =~# '_test.exs$'
     return g:turbux_command_ex_unit
+  elseif a:file =~# '_test.go$'
+    return g:turbux_command_go
   endif
   return ''
 endfunction
@@ -214,6 +217,12 @@ endfunction
 function! SendFocusedTestToTmux(file, line) abort
   " Elixir mix does not support running tests on line numbers
   if a:file =~# '_test.exs$'
+    call SendTestToTmux(a:file)
+    return
+  endif
+  
+  " Go does not support running tests on line numbers
+  if a:file =~# '_test.go$'
     call SendTestToTmux(a:file)
     return
   endif
