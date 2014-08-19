@@ -26,6 +26,7 @@ call s:turbux_command_setting("rspec", "rspec")
 call s:turbux_command_setting("test_unit", "ruby -Itest")
 call s:turbux_command_setting("turnip", "rspec -rturnip")
 call s:turbux_command_setting("cucumber", "cucumber")
+call s:turbux_command_setting("jasmine", "script/test")
 call s:turbux_command_setting("prefix", "")
 " }}}1
 
@@ -86,6 +87,8 @@ function! s:prefix_for_test(file)
     return g:turbux_command_ex_unit
   elseif a:file =~# '_test.go$'
     return g:turbux_command_go
+  elseif a:file =~# '_spec.coffee$'
+    return g:turbux_command_jasmine
   endif
   return ''
 endfunction
