@@ -218,12 +218,6 @@ function! SendTestToTmux(file) abort
 endfunction
 
 function! SendFocusedTestToTmux(file, line) abort
-  " Elixir mix does not support running tests on line numbers
-  if a:file =~# '_test.exs$'
-    call SendTestToTmux(a:file)
-    return
-  endif
-  
   " Go does not support running tests on line numbers
   if a:file =~# '_test.go$'
     call SendTestToTmux(a:file)
