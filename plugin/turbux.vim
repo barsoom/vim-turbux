@@ -127,7 +127,7 @@ function! s:command_for_file(file)
 endfunction
 
 function! s:default_runner()
-  if exists("*RunVimTmuxCommand")
+  if exists("*VimuxRunCommand")
     return 'vimux'
   elseif exists("*Send_to_Tmux")
     return 'tslime'
@@ -153,7 +153,7 @@ function! s:runner()
 endfunction
 
 function! s:run_command_with_vimux(command)
-  return RunVimTmuxCommand(a:command)
+  return VimuxRunCommand(a:command)
 endfunction
 
 function! s:run_command_with_tslime(command)
