@@ -75,6 +75,8 @@ function! s:prefix_for_test(file)
     return g:turbux_command_rspec
   elseif a:file =~# '_spec.rb$'
     return g:turbux_command_rspec
+  elseif a:file =~# 'tests' && a:file =~# 'elm'
+    return g:turbux_command_rspec
   elseif a:file =~# '\(\<test_.*\|_test\)\.rb$'
     return g:turbux_command_test_unit
   elseif a:file =~# '.feature$'
